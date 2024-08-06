@@ -1,18 +1,18 @@
 let world = require("./World");
-let serverPacket = require("./serverPackets/serverPackets");
-let NPC = require("./NPC");
+let serverPacket = require("./serverpackets/serverPackets");
+let NPC = require("./Npc");
 
 const { Worker } = require('worker_threads')
 
 
 
 class Tasks {
-	
+
 	runTask(workerName, workerData) {
 	  return new Promise((resolve, reject) => {
 		const worker = new Worker('./gameserver/Tasks/'+workerName+'.js', { workerData });
 		//console.info(`Starting Task ${workerName} ${worker.threadId}`);
-		
+
 		worker.on('message', resolve);
 		worker.on('error', reject);
 		worker.on('exit', (code) => {
@@ -22,11 +22,11 @@ class Tasks {
 	  })
 	}
 
-	
+
 	async startNpcMove() {
-		
+
 		try{
-			const npcList = world.getNpcList(); 
+			const npcList = world.getNpcList();
 			const moveNpc = await this.runTask('npcMove',npcList)
 			//const moveNpc = await this.runService('npcMove',null)
 
@@ -37,7 +37,7 @@ class Tasks {
 					player.sendPacket(new serverPacket.MoveToLocation(position, npc));
 				})
 			}
-			
+
 			//where we go again
 			setTimeout(()=>{
 				this.startNpcMove();
