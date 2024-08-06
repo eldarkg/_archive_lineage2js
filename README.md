@@ -1,15 +1,21 @@
 # lineage 2 js
 
-node.js server emulator  
+node.js server emulator
 server for lineage 2 chronicle 1 harbingers of war
 
-config: data/config.json  
-init: npm install -i
+config: data/config.json
+
+init:
+
+  npm install node
+
+  npm install -i
 
 ### run on linux:
 
-node loginserver.js  
-node gameserver.js
+node_modules/node/bin/node loginserver.js
+
+node_modules/node/bin/node gameserver.js
 
 ### run on windows:
 
@@ -17,7 +23,7 @@ serverStart.bat
 
 ### Packets
 
-:heavy_check_mark: - done  
+:heavy_check_mark: - done
 :warning: - in work
 
 | Client packets(game server) | Server packets(game server) |
